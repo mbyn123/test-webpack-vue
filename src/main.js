@@ -1,6 +1,7 @@
 import { a } from './js/a.js'
 const { b } = require('./js/b.js')
 import './js/c.js'
+import {d} from '@/js/d.jsx'
 // 解析template模板，须使用vue.esm-bundler版本进行解析
 // import {createApp} from 'vue/dist/vue.esm-bundler'
 import { createApp } from 'vue'
@@ -17,6 +18,7 @@ if(module.hot){
 
 a()
 b()
+d()
 
 
 const names = ["abc", "cba", "nba2"];
