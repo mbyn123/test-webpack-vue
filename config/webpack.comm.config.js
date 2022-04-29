@@ -1,8 +1,6 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { DefinePlugin } = require('webpack')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader/dist/index')
 
 /**
@@ -12,40 +10,20 @@ const { VueLoaderPlugin } = require('vue-loader/dist/index')
 
 module.exports = {
     target: 'web',
-    mode: 'development',
-    devtool: 'source-map', // 建立js映射文件，方便调试代码和错误
+   
     entry: './src/main.js', // 项目入口文件
     // watch: true, // 开启监听数据变化，也可以设置在package.json scripts webpack --watch
     output: {
-        path: path.resolve(__dirname, './build'), // 打包输出文件
+        path: path.resolve(__dirname, '../build'), // 打包输出文件
         filename: 'js/bundle.js', // 打包文件名称
         // assetModuleFilename: "img/[name]_[hash:6][ext]" // webpack5 统一设置打包文件路径名称
     },
-    // devServer本质是开启一个Express本地服务，让浏览器访问
-    devServer: {
-        hot: true, // 开启热更新 本质是开启一个socket长链接建立和浏览器之间的链接
-        static: true, // 开发环境下使用 允许配置从目录提供静态文件的选项（默认是public文件夹）
-        // static:'./public',//还可以配置直接配置路径或对象
-        // host: "0.0.0.0",
-        port: "9527",
-        open: true, // 自动打开浏览器 也可以设置在package.json scripts webpack --open
-        // compress: true, // 开启gzip压缩 针对开发模式下的文件
-        proxy:{
-            "/api":{
-                target: "http://xxxxx:8888", // 要代理的地址
-                pathRewrite:{
-                    "^/api": "" // 重写路径，将/api去除掉
-                },
-                secure:false, // 默认情况下不接收转发到https的服务器上，默认值为true
-                changeOrigin: true // 它表示是否更新代理后请求的headers中host地址；
-            }
-        }
-    },
+  
     resolve:{
         // 设置默认后缀名，在import引入文件时可以不用写后缀
         extensions:['.js','.json','.mjs','.vue','.ts','.jsx','.tsx'],
         alias:{
-            "@":path.resolve(__dirname,"./src") // 设置别名
+            "@":path.resolve(__dirname,"../src") // 设置别名
         }
     },
     module: {
@@ -162,7 +140,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
+       
         new HtmlWebpackPlugin({
             template: './public/index.html', // 设置html模板
             title: 'test-webpack' // 设置页面标题
@@ -173,20 +151,7 @@ module.exports = {
             __VUE_OPTIONS_API__: true, // 对vue2进行适配
             __VUE_PROD_DEVTOOLS__: false // 生产环境是否使用DEVTOOLS工具
         }),
-        // 打包上线的时候使用
-        // new CopyWebpackPlugin({
-        //     patterns: [
-        //         {
-        //             from: "public", // 要拷贝的文件夹
-        //             to: './', // 拷贝到那个位置
-        //             globOptions: {
-        //                 ignore: [
-        //                     "**/index.html", // 过滤不需要拷贝的文件
-        //                 ]
-        //             }
-        //         }
-        //     ]
-        // }),
+       
         new VueLoaderPlugin()
     ]
 }

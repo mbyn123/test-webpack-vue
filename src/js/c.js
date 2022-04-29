@@ -25,7 +25,7 @@ iEl.className = 'iconfont icon-ashbin'
 const imgEl2 = document.createElement('img');
 imgEl2.src = a;
 
-// console.log(content.length)
+console.log('111122223333')
 
 document.body.appendChild(divEl)
 document.body.appendChild(iEl)

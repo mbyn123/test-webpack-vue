@@ -1,6 +1,7 @@
 <template>
     <div class="app">
         <h2>我是vue渲染出来的{{title}}</h2>
+        <input type="text" v-model="message">
     </div>
 </template>
 
@@ -8,7 +9,8 @@
 export default {
     data() {
         return {
-            title: "单文件组件",
+            title: "单文件组件2223333",
+            message: ''
         };
     },
 };
